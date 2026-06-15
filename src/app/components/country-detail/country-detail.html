@@ -1,0 +1,41 @@
+@if(pais(); as paisSeleccionado) {
+  <section class="detail-page">
+    <h1>Detalles demográficos</h1>
+
+    <dl>
+      <div>
+        <dt>País</dt>
+        <dd>{{ paisSeleccionado.name.common }}</dd>
+      </div>
+      <div>
+        <dt>Nombre oficial</dt>
+        <dd>{{ paisSeleccionado.name.official }}</dd>
+      </div>
+      <div>
+        <dt>Capital</dt>
+        <dd>{{ paisSeleccionado.capital?.[0] || 'No disponible' }}</dd>
+      </div>
+      <div>
+        <dt>Región</dt>
+        <dd>{{ paisSeleccionado.region }}</dd>
+      </div>
+      <div>
+        <dt>Subregión</dt>
+        <dd>{{ paisSeleccionado.subregion || 'No disponible' }}</dd>
+      </div>
+      <div>
+        <dt>Población</dt>
+        <dd>{{ paisSeleccionado.population | number }}</dd>
+      </div>
+      <div>
+        <dt>Área</dt>
+        <dd>{{ paisSeleccionado.area | number }} km²</dd>
+      </div>
+    </dl>
+
+    <div class="actions">
+      <button type="button" (click)="regresar()">Regresar</button>
+      <button type="button" (click)="verClima()">Clima</button>
+    </div>
+  </section>
+}

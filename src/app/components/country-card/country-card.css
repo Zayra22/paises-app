@@ -1,0 +1,16 @@
+.country-card {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  margin-top: 1.5rem;
+}
+
+.country-card img {
+  width: min(100%, 280px);
+  border: 1px solid #ddd;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}

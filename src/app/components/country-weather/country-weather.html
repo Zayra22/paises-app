@@ -1,0 +1,35 @@
+@if(pais(); as paisSeleccionado) {
+  <section class="weather-page">
+    <h1>Clima de {{ paisSeleccionado.name.common }}</h1>
+
+    @if(cargando) {
+      <p>Consultando clima...</p>
+    }
+
+    @if(mensajeError) {
+      <p class="error">{{ mensajeError }}</p>
+    }
+
+    @if(clima) {
+      <dl>
+        <div>
+          <dt>Temperatura</dt>
+          <dd>{{ clima.temperature }} °C</dd>
+        </div>
+        <div>
+          <dt>Velocidad del viento</dt>
+          <dd>{{ clima.windspeed }} km/h</dd>
+        </div>
+        <div>
+          <dt>Dirección del viento</dt>
+          <dd>{{ clima.winddirection }}°</dd>
+        </div>
+      </dl>
+    }
+
+    <div class="actions">
+      <button type="button" (click)="regresar()">Regresar</button>
+      <button type="button" (click)="verDetalle()">Detalle</button>
+    </div>
+  </section>
+}

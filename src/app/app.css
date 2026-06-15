@@ -1,0 +1,4 @@
+.app-shell {
+  width: min(100% - 2rem, 960px);
+  margin: 2rem auto;
+}

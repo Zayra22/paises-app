@@ -1,0 +1,26 @@
+{
+  "/restcountries-api": {
+    "target": "https://api.restcountries.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/restcountries-api": ""
+    }
+  },
+  "/openmeteo-geocoding": {
+    "target": "https://geocoding-api.open-meteo.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/openmeteo-geocoding": ""
+    }
+  },
+  "/openmeteo-forecast": {
+    "target": "https://api.open-meteo.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/openmeteo-forecast": ""
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<section class="country-card">
+  <h2>{{ pais.name.common }}</h2>
+
+  <img [src]="pais.flags.png" [alt]="pais.flags.alt || pais.name.common">
+
+  <div class="actions">
+    <button type="button" (click)="verDetalle()">Detalle</button>
+    <button type="button" (click)="verClima()">Clima</button>
+  </div>
+</section>

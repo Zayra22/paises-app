@@ -1,0 +1,43 @@
+<section class="search-page">
+  <h1>Buscador de Países</h1>
+
+  <div class="search-box">
+    <label for="country-search">País</label>
+    <div class="search-controls">
+      <input
+        id="country-search"
+        type="text"
+        placeholder="Escribe un país"
+        [ngModel]="nombrePais"
+        (ngModelChange)="onBuscarTexto($event)"
+        (keydown.enter)="buscarPais()"
+        autocomplete="off">
+
+      <button type="button" (click)="buscarPais()">Buscar</button>
+    </div>
+
+    @if(recomendaciones.length > 0) {
+      <ul class="suggestions">
+        @for(pais of recomendaciones; track pais.name.common) {
+          <li>
+            <button type="button" (click)="seleccionarPais(pais)">
+              {{ pais.name.common }}
+            </button>
+          </li>
+        }
+      </ul>
+    }
+
+    @if(cargando) {
+      <p class="status">Buscando...</p>
+    }
+
+    @if(mensajeError) {
+      <p class="error">{{ mensajeError }}</p>
+    }
+  </div>
+
+  @if(pais) {
+    <app-country-card [pais]="pais"></app-country-card>
+  }
+</section>

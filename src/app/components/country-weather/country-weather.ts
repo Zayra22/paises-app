@@ -1,6 +1,5 @@
-import { Component, OnInit, computed, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs';
 import { CountryStateService } from '../../services/country-state';
 import { CurrentWeather, WeatherService } from '../../services/weather';
 
@@ -14,6 +13,7 @@ export class CountryWeather implements OnInit {
   private countryState = inject(CountryStateService);
   private weatherService = inject(WeatherService);
   private router = inject(Router);
+  private changeDetector = inject(ChangeDetectorRef);
 
   pais = computed(() => this.countryState.paisSeleccionado());
   clima: CurrentWeather | null = null;
@@ -27,20 +27,54 @@ export class CountryWeather implements OnInit {
       return;
     }
 
-    const lugar = paisSeleccionado.capital?.[0] || paisSeleccionado.name.common;
+    if (!paisSeleccionado.coordinates) {
+      this.mensajeError = 'No hay coordenadas disponibles para consultar el clima.';
+      return;
+    }
+
     this.cargando = true;
     this.mensajeError = '';
 
-    this.weatherService.obtenerClima(lugar, paisSeleccionado.coordinates).pipe(
-      finalize(() => {
-        this.cargando = false;
-      })
-    ).subscribe({
-      next: (clima) => {
+    const coordenadas = paisSeleccionado.coordinates;
+    let climaCargado = false;
+
+    const cargarConFetch = async () => {
+      if (climaCargado) {
+        return;
+      }
+
+      try {
+        const clima = await this.weatherService.obtenerClimaConFetch(coordenadas);
+        climaCargado = true;
         this.clima = clima;
+        this.mensajeError = '';
+      } catch {
+        this.mensajeError = 'No se pudo obtener el clima.';
+      } finally {
+        this.cargando = false;
+        this.changeDetector.detectChanges();
+      }
+    };
+
+    const respaldo = window.setTimeout(() => {
+      cargarConFetch();
+    }, 3000);
+
+    this.weatherService.obtenerClima(coordenadas).subscribe({
+      next: (clima) => {
+        if (climaCargado) {
+          return;
+        }
+
+        window.clearTimeout(respaldo);
+        climaCargado = true;
+        this.clima = clima;
+        this.cargando = false;
+        this.changeDetector.detectChanges();
       },
       error: () => {
-        this.mensajeError = 'No se pudo obtener el clima.';
+        window.clearTimeout(respaldo);
+        cargarConFetch();
       }
     });
   }

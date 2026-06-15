@@ -2,15 +2,34 @@
   display: grid;
   gap: 1rem;
   justify-items: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border: 1px solid #e2e8f0;
+}
+
+.country-card h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #172033;
 }
 
 .country-card img {
-  width: min(100%, 280px);
-  border: 1px solid #ddd;
+  width: min(100%, 340px);
+  border-radius: 16px;
+  border: 3px solid white;
+  box-shadow: 0 15px 30px rgba(15, 23, 42, 0.18);
+  transition: 0.3s;
+}
+
+.country-card img:hover {
+  transform: scale(1.03);
 }
 
 .actions {
   display: flex;
   gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }

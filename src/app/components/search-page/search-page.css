@@ -54,14 +54,33 @@ input {
   box-shadow: 0 12px 25px rgba(15, 23, 42, 0.15);
 }
 
+.suggestions li {
+  list-style: none;
+}
+
 .suggestions button {
   width: 100%;
-  padding: 0.65rem;
-  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  border: none;
+  border-radius: 10px;
   background: transparent;
   color: #172033;
   text-align: left;
   box-shadow: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.suggestion-flag {
+  width: 32px;
+  height: 22px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
+  flex-shrink: 0;
 }
 
 .suggestions button:hover {
@@ -69,6 +88,7 @@ input {
   transform: none;
   box-shadow: none;
 }
+
 
 .status {
   color: #64748b;

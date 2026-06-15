@@ -25,16 +25,16 @@ export class SearchPage implements OnDestroy {
 
   constructor() {
     this.busquedaSubscription = this.busquedaSubject.pipe(
-      debounceTime(250),
+      debounceTime(10),
       distinctUntilChanged(),
       switchMap((termino) => {
         const texto = termino.trim();
 
-        if (!texto) {
-          this.recomendaciones = [];
-          this.mensajeError = '';
-          return of([]);
-        }
+    if (!texto) {
+      this.recomendaciones = [];
+      this.mensajeError = '';
+      return of([]);
+    }
 
         this.cargando = true;
         this.mensajeError = '';

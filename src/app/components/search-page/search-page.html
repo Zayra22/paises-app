@@ -16,17 +16,22 @@
       <button type="button" (click)="buscarPais()">Buscar</button>
     </div>
 
-    @if(recomendaciones.length > 0) {
-      <ul class="suggestions">
-        @for(pais of recomendaciones; track pais.name.common) {
-          <li>
-            <button type="button" (click)="seleccionarPais(pais)">
-              {{ pais.name.common }}
-            </button>
-          </li>
-        }
-      </ul>
-    }
+  @if(recomendaciones.length > 0) {
+    <ul class="suggestions">
+      @for(pais of recomendaciones; track pais.name.common) {
+        <li>
+          <button type="button" (click)="seleccionarPais(pais)">
+            <img
+              class="suggestion-flag"
+              [src]="pais.flags.png || pais.flags.svg"
+              [alt]="pais.flags.alt || pais.name.common">
+
+            <span>{{ pais.name.common }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+  }
 
     @if(cargando) {
       <p class="status">Buscando...</p>

@@ -82,7 +82,7 @@ export class CountryService {
     return this.obtenerTodosLosPaises().pipe(
       map((paises) => paises
         .filter((pais) => pais.searchNames.some((nombreBuscable) =>
-          this.normalizar(nombreBuscable).startsWith(texto)
+          this.normalizar(nombreBuscable).includes(texto)
         ))
         .sort((a, b) => a.name.common.localeCompare(b.name.common))
       )
@@ -125,10 +125,10 @@ export class CountryService {
   }
 
   private mapearPais(pais: RestCountryV5): Country {
-    const nombreComun = pais.names?.common ?? 'Sin nombre';
-    const nombreOficial = pais.names?.official ?? nombreComun;
-    const nombreComunEspanol = pais.names?.translations?.spa?.common;
-    const nombreOficialEspanol = pais.names?.translations?.spa?.official;
+const nombreComunEspanol = pais.names?.translations?.spa?.common;
+const nombreOficialEspanol = pais.names?.translations?.spa?.official;
+const nombreComun = nombreComunEspanol ?? pais.names?.common ?? 'Sin nombre';
+const nombreOficial = nombreOficialEspanol ?? pais.names?.official ?? nombreComun;
     const searchNames = [
       nombreComun,
       nombreOficial,

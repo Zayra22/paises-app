@@ -42,7 +42,11 @@
     }
   </div>
 
-  @if(pais) {
-    <app-country-card [pais]="pais"></app-country-card>
-  }
+    @if(pais) {
+      <app-country-card
+        [pais]="pais"
+        (accionSeleccionada)="manejarAccion($event)">
+      </app-country-card>
+    }
+
 </section>

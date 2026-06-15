@@ -4,6 +4,7 @@ import { Subject, Subscription, catchError, debounceTime, distinctUntilChanged, 
 import { Country, CountryService } from '../../services/country';
 import { CountryStateService } from '../../services/country-state';
 import { CountryCard } from '../country-card/country-card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-page',
@@ -12,6 +13,7 @@ import { CountryCard } from '../country-card/country-card';
   styleUrl: './search-page.css'
 })
 export class SearchPage implements OnDestroy {
+  private router = inject(Router);
   private countryService = inject(CountryService);
   private countryState = inject(CountryStateService);
   private busquedaSubject = new Subject<string>();
@@ -115,4 +117,14 @@ export class SearchPage implements OnDestroy {
     this.mensajeError = '';
     this.countryState.seleccionarPais(pais);
   }
+
+  manejarAccion(accion: string) {
+  if (accion === 'detalle') {
+    this.router.navigate(['/detalle']);
+  }
+
+  if (accion === 'clima') {
+    this.router.navigate(['/clima']);
+  }
+}
 }
